@@ -109,8 +109,9 @@ cluster.vm.define "democdh" do |config|
   config.vm.box = "quickstart/cdh"
   config.ssh.insert_key = false
   config.vm.provider :virtualbox do |vb, override|
-    vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--cpus", "1"]
+    vb.customize ["modifyvm", :id, "--vram", "64"]
   end
   config.vm.hostname = "democdh"
   config.vm.network :private_network, ip: "172.16.2.9"
