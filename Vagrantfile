@@ -105,4 +105,23 @@ cluster.vm.define "demovm4" do |config|
   end
 end
 
+cluster.vm.define "democdh" do |config|
+  config.vm.box = "quickstart/cdh"
+  config.ssh.insert_key = false
+  config.vm.provider :virtualbox do |vb, override|
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.customize ["modifyvm", :id, "--cpus", "1"]
+  end
+  config.vm.hostname = "democdh"
+  config.vm.network :private_network, ip: "172.16.2.9"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "site.yml"
+    ansible.groups = {
+      "tag_Vagrant_True" => ["democdh"],
+      "tag_Vagrant_local" => ["democdh"],
+      "tag_Name_demovm" => ["democdh"],
+    }
+  end
+end
+
 end

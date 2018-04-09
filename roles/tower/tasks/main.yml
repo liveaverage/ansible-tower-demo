@@ -144,8 +144,9 @@
     status_code:
       - 200
       - 201
+      - 400
   register: response
-  until: response.status == 201 or response.status == 202
+  until: response.status == 201 or response.status == 202 or response.status == 400
   retries: 10
   delay: 30
   changed_when: response.status == 201 or response.status == 202
@@ -162,8 +163,9 @@
     status_code:
       - 200
       - 201
+      - 400
   register: response
-  until: response.status == 201 or response.status == 202
+  until: response.status == 201 or response.status == 202 or response.status == 400
   retries: 10
   delay: 30
   changed_when: response.status == 201 or response.status == 202
